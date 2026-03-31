@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>L'Ingénierie Biomédicale — Introduction</title>
+
+  <!-- Reveal.js CSS (CDN) -->
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reset.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+
+  <style>
+    /* ──────────────────────────────────────────────
+       Palette : sobre, calme, classique
+       ────────────────────────────────────────────── */
+    :root {
+      --bg:        #F8F9FA;
+      --navy:      #1A2B3C;
+      --blue:      #1565C0;
+      --blue-lt:   #E3F2FD;
+      --green:     #2E7D32;
+      --muted:     #546E7A;
+      --accent:    #1565C0;
+      --rule:      #CFD8DC;
+    }
+
+    .reveal-viewport { background-color: var(--bg); }
+
+    .reveal {
+      font-family: "Georgia", "Times New Roman", serif;
+      color: var(--navy);
+      background-color: var(--bg);
+    }
+
+    /* ── Titres ── */
+    .reveal h1, .reveal h2 {
+      font-family: "Georgia", serif;
+      color: var(--blue);
+      text-transform: none;
+      letter-spacing: -0.01em;
+      line-height: 1.15;
+    }
+    .reveal h1 { font-size: 2em; }
+    .reveal h2 { font-size: 1.5em; border-bottom: 2px solid var(--rule); padding-bottom: 6px; margin-bottom: 0.5em; }
+    .reveal h3 { font-family: "Georgia", serif; color: var(--muted); font-size: 1.1em; text-transform: none; }
+
+    /* ── Listes ── */
+    .reveal ul { list-style: none; padding-left: 0; }
+    .reveal ul li { padding: 0.25em 0 0.25em 1.4em; position: relative; }
+    .reveal ul li::before { content: "▸"; position: absolute; left: 0; color: var(--blue); }
+    .reveal ul ul li::before { content: "–"; color: var(--muted); }
+
+    /* ── Liens ── */
+    .reveal a { color: var(--blue); }
+
+    /* ── Séparateur horizontal ── */
+    .reveal hr { border: none; border-top: 1px solid var(--rule); margin: 0.8em 0; }
+
+    /* ── Classes utilitaires ── */
+    .accent   { color: var(--blue); font-weight: bold; }
+    .muted    { color: var(--muted); font-size: 0.85em; }
+    .green    { color: var(--green); }
+    .big      { font-size: 1.6em; font-weight: bold; color: var(--blue); }
+    .pill {
+      display: inline-block;
+      background: var(--blue-lt);
+      color: var(--blue);
+      border: 1px solid var(--blue);
+      border-radius: 4px;
+      padding: 2px 10px;
+      font-size: 0.85em;
+      margin: 2px;
+    }
+    .card {
+      background: var(--blue-lt);
+      border-left: 4px solid var(--blue);
+      border-radius: 4px;
+      padding: 10px 16px;
+      margin: 8px 0;
+      font-size: 0.92em;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1em;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0.8em;
+    }
+    .cite { font-size: 0.72em; color: var(--muted); }
+    .title-slide { text-align: center; }
+    .title-slide h1 { color: var(--blue); margin-bottom: 0.3em; }
+    .title-slide .subtitle { color: var(--muted); font-size: 1em; }
+
+    /* ── Diapositive citations ── */
+    .ref-list { font-size: 0.68em; color: var(--navy); }
+    .ref-list li { padding: 0.3em 0 0.3em 1.2em; border-bottom: 1px dotted var(--rule); }
+    .ref-list li::before { content: ""; }
+
+    img.chart { max-height: 380px; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,.1); }
+    img.diagram { max-height: 440px; background: white; border-radius: 6px; padding: 4px; }
+
+    /* ── Numérotation de progression ── */
+    .progress-bar { position: absolute; bottom: 0; left: 0; height: 3px; background: var(--blue); }
+  </style>
+</head>
+
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- ═══════════════════════════════════════════════════
+     1 — TITRE
+     ═══════════════════════════════════════════════════ -->
+<section>
+  <div class="title-slide" style="padding-top: 2em;">
+    <h1>L'Ingénierie Biomédicale</h1>
+    <hr>
+    <p class="subtitle">
+      Applications · Biomatériaux · Simulation<br>
+      <span class="muted">Introduction — CEC-6</span>
+    </p>
+    <br>
+    <p class="muted" style="font-size:0.8em;">
+      Sources : OMS, GlobalData, Ratner <em>et al.</em>, Nature Biomed. Eng.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     2 — QUESTION D'ACCROCHE
+     ═══════════════════════════════════════════════════ -->
+<section>
+  <h2>Une question pour commencer…</h2>
+  <br>
+  <blockquote style="border-left: 4px solid var(--blue); padding: 0.6em 1em; background: var(--blue-lt); border-radius: 4px; font-style: italic; font-size: 1.1em;">
+    « Si vous deviez concevoir un cœur artificiel demain matin,
+    par où commenceriez-vous ? »
+  </blockquote>
+  <br>
+  <ul class="fragment">
+    <li>Problème <span class="accent">mécanique</span> — résistance, fatigue, débit</li>
+    <li>Problème <span class="accent">biologique</span> — biocompatibilité, coagulation</li>
+    <li>Problème <span class="accent">électronique</span> — capteurs, régulation</li>
+    <li>Problème <span class="accent">logiciel</span> — algorithmes de contrôle</li>
+  </ul>
+  <p class="fragment muted" style="margin-top:0.8em;">
+    → L'ingénierie biomédicale : là où <em>toutes</em> ces disciplines se rencontrent.
+  </p>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     3 — PLAN (ROADMAP)
+     ═══════════════════════════════════════════════════ -->
+<section>
+  <h2>Plan</h2>
+  <div class="grid-2" style="margin-top: 0.8em;">
+    <div class="card">
+      <strong>1 · Définition &amp; contexte</strong><br>
+      <span class="muted">Qu'est-ce que l'ingénierie biomédicale ?</span>
+    </div>
+    <div class="card">
+      <strong>2 · Applications médicales</strong><br>
+      <span class="muted">Dispositifs, imagerie, prothèses</span>
+    </div>
+    <div class="card">
+      <strong>3 · Biomatériaux</strong><br>
+      <span class="muted">Types, propriétés, exemples</span>
+    </div>
+    <div class="card">
+      <strong>4 · Modélisation &amp; simulation</strong><br>
+      <span class="muted">Médecine personnalisée, jumeaux numériques</span>
+    </div>
+  </div>
+  <p class="muted fragment" style="margin-top:1em; text-align:center;">
+    ⏱ ~9 min · Questions : 5 min
+  </p>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     4 — DÉFINITION
+     ═══════════════════════════════════════════════════ -->
+<section>
+  <h2>1 · L'ingénierie biomédicale</h2>
+  <div class="card" style="font-size:1em; margin-bottom:0.8em;">
+    Application des principes et des méthodes d'ingénierie
+    aux sciences biologiques et médicales.
+  </div>
+  <ul>
+    <li>Champ <span class="accent">interdisciplinaire</span> : mécanique, électronique, chimie, informatique</li>
+    <li>Objectif : améliorer le <span class="accent">diagnostic</span>, le <span class="accent">traitement</span> et la <span class="accent">prévention</span></li>
+    <li>Marché mondial estimé à <span class="big">~&nbsp;500–520 Md$</span> en 2023</li>
+  </ul>
+  <p class="cite fragment" style="margin-top:0.8em;">
+    Source : GlobalData Medical Devices Market Report 2024 ; IMDRF 2023
+  </p>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     5 — MARCHÉ (GRAPHIQUE SEABORN)
+     ═══════════════════════════════════════════════════ -->
+<section>
+  <h2>Marché mondial — principaux segments</h2>
+  <img class="chart"
+       src="../visualizations/market_segments.png"
+       alt="Segments du marché mondial des dispositifs médicaux (2023)">
+  <p class="cite">Sources : GlobalData 2024 ; IMDRF 2023 — valeurs indicatives en Mds USD</p>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     6 — CROISSANCE (GRAPHIQUE SEABORN)
+     ═══════════════════════════════════════════════════ -->
+<section>
+  <h2>Croissance du marché biomédical</h2>
+  <img class="chart"
+       src="../visualizations/growth_projection.png"
+       alt="Projection de croissance 2018-2030">
+  <ul class="fragment" style="font-size:0.85em; margin-top:0.5em;">
+    <li>CAGR ≈ <span class="accent">5,5 %</span> sur la période 2018–2030</li>
+    <li>Moteurs : vieillissement démographique, maladies chroniques, IA</li>
+  </ul>
+  <p class="cite">Sources : Evaluate MedTech 2023 ; GlobalData 2024</p>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     7 — DISPOSITIFS MÉDICAUX
+     ═══════════════════════════════════════════════════ -->
+<section>
+  <h2>2 · Dispositifs médicaux</h2>
+  <div class="grid-3" style="margin-top:0.6em;">
+    <div class="card">
+      <strong>Cardiologie</strong><br>
+      <span class="muted">Pacemakers, défibrillateurs (DAI), cœurs artificiels</span>
+    </div>
+    <div class="card">
+      <strong>Métabolisme</strong><br>
+      <span class="muted">Pompes à insuline, pancréas artificiel en boucle fermée</span>
+    </div>
+    <div class="card">
+      <strong>Réanimation</strong><br>
+      <span class="muted">Ventilateurs mécaniques, oxygénateurs ECMO</span>
+    </div>
+  </div>
+  <br>
+  <ul class="fragment" style="font-size:0.9em;">
+    <li>Du <span class="accent">capteur</span> (signal biologique) au <span class="accent">système complet</span> (actionneur)</li>
+    <li>Processus réglementé : FDA (États-Unis), marquage CE (Europe)</li>
+  </ul>
+  <p class="cite fragment">Réf. : Enderle &amp; Bronzino, <em>Introduction to Biomedical Engineering</em>, 3e éd., 2012</p>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     8 — IMAGERIE MÉDICALE
+     ═══════════════════════════════════════════════════ -->
+<section>
+  <h2>Imagerie médicale — voir sans ouvrir</h2>
+  <div class="grid-2" style="font-size:0.9em; margin-top:0.6em;">
+    <div>
+      <ul>
+        <li><span class="accent">Radiographie X</span> — os, poumons</li>
+        <li><span class="accent">Tomodensitométrie (TDM/CT)</span> — coupes 3D</li>
+        <li><span class="accent">IRM</span> — tissus mous, cerveau, cœur</li>
+        <li><span class="accent">Ultrasons (échographie)</span> — temps réel</li>
+        <li><span class="accent">TEP (PET)</span> — métabolisme cellulaire</li>
+      </ul>
+    </div>
+    <div class="fragment">
+      <div class="card">
+        <strong>Traitement numérique</strong><br>
+        Reconstruction 3D · segmentation · IA diagnostique<br>
+        <span class="muted">→ Précision, rapidité, non-invasivité</span>
+      </div>
+      <div class="card" style="margin-top:0.5em;">
+        <strong>Exemple</strong><br>
+        Détection précoce de tumeurs mammaires par CNN<br>
+        <span class="muted">Sensibilité &gt; 90 % (McKinney <em>et al.</em>, Nature 2020)</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     9 — PROTHÈSES & IMPLANTS
+     ═══════════════════════════════════════════════════ -->
+<section>
+  <h2>Prothèses &amp; implants — restaurer le mouvement</h2>
+  <ul>
+    <li><span class="accent">Membres bioniques</span> — commande myoélectrique, retour haptique</li>
+    <li><span class="accent">Implants cochléaires</span> — traitement numérique du son, ~700 000 porteurs</li>
+    <li><span class="accent">Implants rétiniens</span> — Argus II (Second Sight Medical)</li>
+    <li><span class="accent">Exosquelettes</span> — réhabilitation motrice, lésions médullaires</li>
+    <li><span class="accent">Interfaces cerveau-machine (BCI)</span> — Neuralink, BrainGate</li>
+  </ul>
+  <p class="fragment muted" style="margin-top:0.8em; font-style: italic;">
+    « L'enjeu n'est plus de remplacer un membre,
+    mais de le réintégrer dans le système nerveux. »
+  </p>
+  <p class="cite fragment">Réf. : Resnik <em>et al.</em>, <em>JRRD</em> 2012 ; Bensmaia &amp; Miller, <em>Nat Rev Neurosci</em> 2014</p>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     10 — BIOMATÉRIAUX — DÉFINITION
+     ═══════════════════════════════════════════════════ -->
+<section>
+  <h2>3 · Biomatériaux</h2>
+  <div class="card" style="font-size:1em;">
+    Tout matériau conçu pour <strong>interagir avec des systèmes biologiques</strong>
+    dans un but diagnostique ou thérapeutique.
+    <span class="cite">(Williams, Biomaterials 2009)</span>
+  </div>
+  <br>
+  <p>Propriétés clés :</p>
+  <div class="grid-3" style="font-size:0.85em;">
+    <div class="card" style="text-align:center;">
+      <strong class="accent">Biocompatibilité</strong><br>
+      <span class="muted">Pas de réaction toxique ni immune</span>
+    </div>
+    <div class="card" style="text-align:center;">
+      <strong class="accent">Résistance mécanique</strong><br>
+      <span class="muted">Charges cycliques, fatigue, usure</span>
+    </div>
+    <div class="card" style="text-align:center;">
+      <strong class="accent">Durabilité <em>in vivo</em></strong><br>
+      <span class="muted">Corrosion, dégradation contrôlée</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     11 — TYPES DE BIOMATÉRIAUX
+     ═══════════════════════════════════════════════════ -->
+<section>
+  <h2>Quatre familles de biomatériaux</h2>
+  <div class="grid-2" style="align-items:center; margin-top:0.4em;">
+    <ul style="font-size:0.85em;">
+      <li><span class="pill">Métaux</span> Ti-6Al-4V → prothèses orthopédiques</li>
+      <li><span class="pill">Céramiques</span> Hydroxyapatite → revêtements osseux</li>
+      <li><span class="pill">Polymères</span> PLGA → sutures résorbables</li>
+      <li><span class="pill">Composites</span> Fibre de carbone → prothèses de sport</li>
+      <li class="fragment"><span class="pill" style="background:#e8f5e9; border-color: var(--green); color: var(--green);">Biologique</span>
+        Tissus décellularisés, hydrogels, organoïdes</li>
+    </ul>
+    <img class="chart"
+         src="../visualizations/biomaterials_breakdown.png"
+         alt="Répartition des types de biomatériaux dans les implants commerciaux"
+         style="max-height:280px;">
+  </div>
+  <p class="cite">Sources : Ratner <em>et al.</em>, <em>Biomaterials Science</em>, 4e éd., 2020 ; estimations IUPAC</p>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     12 — SCHÉMA INTERDISCIPLINAIRE (PLANTUML)
+     ═══════════════════════════════════════════════════ -->
+<section>
+  <h2>Ingénierie biomédicale — carrefour de disciplines</h2>
+  <img class="diagram"
+       src="https://www.plantuml.com/plantuml/svg/UDfDaCaDmo0GHU-kWhEhSE9SV8YKGneOOGmZiOL5Iaf8ATH1Oy4B9ZV-P-RDdnby01SKwbc1xNeoQPwJHkQGaIiQbTEC52Jh-dxLqd1StvkW0bLJLdmylkAk7wiugyczO1X5lN-E0brq5NH3uDhuSFO-HKuEB8lL-W-rLHGS1NqsvAzaD3ZJd4alnYbepB569HThPTaeeD7-cE-jyHXmyUHODxxhKeLHmc1r9WMyfJ1pJXBznke6LavudF473bPsV000"
+       alt="Carte mentale : disciplines de l'ingénierie biomédicale"
+       style="max-height:400px; background:white; border-radius:6px; padding:4px;">
+  <p class="cite muted" style="font-size:0.65em; margin-top:4px;">
+    Diagramme PlantUML — source : <code>diagrams/interdisciplinary.puml</code>
+  </p>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     13 — MODÉLISATION
+     ═══════════════════════════════════════════════════ -->
+<section>
+  <h2>4 · Modélisation computationnelle</h2>
+  <ul>
+    <li><span class="accent">Éléments finis (FEA/FEM)</span> — contraintes mécaniques dans les os, implants</li>
+    <li><span class="accent">Dynamique des fluides (CFD)</span> — flux sanguin, anévrismes, valves</li>
+    <li><span class="accent">Modèles multi-physiques</span> — couplage électrique-mécanique (cœur)</li>
+  </ul>
+  <div class="fragment card" style="margin-top:0.8em; font-size:0.9em;">
+    <strong>Objectif :</strong> réduire les essais <em>in vitro / in vivo</em>,
+    accélérer la conception et <span class="accent">personnaliser</span> le traitement.
+  </div>
+  <p class="cite fragment" style="margin-top:0.6em;">
+    Réf. : Taylor &amp; Figueroa, <em>Annu. Rev. Biomed. Eng.</em> 2009 ;
+    Viceconti <em>et al.</em>, <em>Nat. Biomed. Eng.</em> 2020
+  </p>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     14 — MÉDECINE PERSONNALISÉE (PLANTUML)
+     ═══════════════════════════════════════════════════ -->
+<section>
+  <h2>Médecine personnalisée &amp; jumeaux numériques</h2>
+  <img class="diagram"
+       src="https://www.plantuml.com/plantuml/svg/UDgDayzk4p4Gnkz-Yb6G41MWGACYw04rIRDI8hQA4ewvcDt9ngftx8vjIczSU-SXo7Fic_0aJ3P_sW1IiRGNp-_pzyruVH6YvfXggyAr8QzPr_155zSLkqJbq5d7y2nxdtt8-e-8iDAbkpLKmLBRW8ygSxn9I0NscTtjJlxsxDtPyCq_e4zcAH_Xm769_1GzbQ2cC5vJ7FoPSDJBJhFB9qJ_vP8vYdkcVphe3PMA9bg4l5cNM4XQyCZ14MbhGhD6-FNz1sGsVOCI8PWwMHsD8wLq4UMKxPhA7bA4mz81fie_X8FEkDOLii45rU9a2csniqV7-J4xIJNgj21AmhAHv9t3iPEhOpPt4HDBk0KzfEkqQ3u_HflxcsJytmbQU9GhDGLu_L7Im3cCPpbqOLve8cGOVbQoAxN9bTHcM3WAaLEnyOBUvOBA1D64aBgEAqseX1CwdmkTkxBvAGEkchKJuzZsiw2NuDbvDhBJh0D8HRmsfQ14jXVF3or1DigxmqoyNgoQTUtAEzBrXdy5aYQoDXGndEp4eqqFC-szutXySQBttFRVdYerDc5ZUw96-K7Qb-k_2mZFmLk9jPHfRSN5od3YgfqUV3Nojj1Qt4bbVkSm5G54oSZQOuhRRe_-ANM1CZ1vaxy1Mzf73000"
+       alt="Flux de simulation pour la médecine personnalisée"
+       style="max-height:390px; background:white; border-radius:6px; padding:4px;">
+  <p class="cite muted" style="font-size:0.65em; margin-top:4px;">
+    Diagramme PlantUML — source : <code>diagrams/personalized-medicine.puml</code>
+  </p>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     15 — PIPELINE DISPOSITIF MÉDICAL (PLANTUML)
+     ═══════════════════════════════════════════════════ -->
+<section>
+  <h2>Du concept au patient — pipeline réglementaire</h2>
+  <img class="diagram"
+       src="https://www.plantuml.com/plantuml/svg/UDg5Kyrkqq0GllifHaA2v820LaMGID0qZQKUYb10dBXCrfDabFMksTbDbRVXwkVmYtLi9r4Q2XmiZMQ-d_bPNql445DfCzcmgp1W2GiqcrNmoHLJRts05_c7_6C-EK786Wl_m6u5IxH29vL92FvXJtjtzVvg-lQqQ29lEUvkV2We_1TrtiRiCh_8Rvz1vjx5WzhaukPoccNTMDdehY0NUSa68ti7HO85YMS7PLCNchNZR3GdiwQW7xm4T6XtGZzTGM1VDNN425seQWgTUcUewgIgqDIMItR8GV63AlZeuwx25S6MTQLaXyhuJX85r53Oil4A52wJxTjnITi8_2kHGda9WnzekJYlmUSXn3Kv6FZ4mmnWz7NlHL2jTz9YnctwwAKx2RvDjPfzrcZdDg7Jy5pko6n7CfPTAoWmw8IsVZZkCAtKlAabMTs909fs4RYmz9oWIiv4aDNte3S-5BxvLB98EwFwhIoLUgBz4lFR2Ro1wGpkCMo6Hyez2u6a09QWH3rLKnzg4dtLXQJl40REksC7SufUESrliDZDtr-kPv8hU9dzGViNgQSy8VmTteD7Tr6Fk7zxz0Jm-XDyyMbBcC3iZDKBNYkd_H4V0K0OEdq0"
+       alt="Pipeline de développement d'un dispositif médical"
+       style="max-height:430px; background:white; border-radius:6px; padding:4px;">
+  <p class="cite muted" style="font-size:0.65em; margin-top:4px;">
+    Diagramme PlantUML — source : <code>diagrams/medical-device-pipeline.puml</code>
+  </p>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     16 — IA & PERSPECTIVES
+     ═══════════════════════════════════════════════════ -->
+<section>
+  <h2>IA &amp; perspectives</h2>
+  <div class="grid-2" style="font-size:0.9em; margin-top:0.5em;">
+    <div>
+      <ul>
+        <li><span class="accent">Analyse d'images</span> (CNN) — détection précoce</li>
+        <li><span class="accent">Prédiction de pathologies</span> — données multiomiques</li>
+        <li><span class="accent">Conception de médicaments</span> — AlphaFold, RFdiffusion</li>
+        <li><span class="accent">Chirurgie robotique</span> — Da Vinci, Mako</li>
+      </ul>
+    </div>
+    <div class="fragment">
+      <div class="card">
+        <strong>Essais « in silico »</strong><br>
+        Tester des milliers de variants d'un implant par simulation
+        avant tout prototypage physique<br>
+        <span class="muted cite">→ Réduction des coûts, délais, tests animaux</span>
+      </div>
+    </div>
+  </div>
+  <p class="cite fragment" style="margin-top:0.8em;">
+    Réf. : Topol, <em>Nat. Med.</em> 2019 ;
+    Jumper <em>et al.</em> (AlphaFold), <em>Nature</em> 2021
+  </p>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     17 — RÉCAPITULATIF / CONCLUSION
+     ═══════════════════════════════════════════════════ -->
+<section>
+  <h2>En résumé</h2>
+  <ul>
+    <li class="fragment">
+      <span class="accent">Applications médicales</span> — dispositifs, imagerie, prothèses :
+      l'ingénieur conçoit les outils du médecin
+    </li>
+    <li class="fragment">
+      <span class="accent">Biomatériaux</span> — la matière au service du vivant :
+      biocompatibilité + performance mécanique
+    </li>
+    <li class="fragment">
+      <span class="accent">Modélisation &amp; simulation</span> — « le numérique au chevet du patient » :
+      personnalisation, jumeaux numériques, IA
+    </li>
+  </ul>
+  <div class="fragment card" style="margin-top:1em; font-style:italic; font-size:0.95em;">
+    L'ingénieur biomédical est le <strong>pont</strong>
+    entre la technologie et la santé humaine —
+    un métier d'avenir au croisement de toutes les disciplines.
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     18 — QUESTIONS
+     ═══════════════════════════════════════════════════ -->
+<section>
+  <div style="text-align:center; padding-top:2.5em;">
+    <h1 style="font-size:2.4em;">Questions ?</h1>
+    <hr style="width:40%; margin:1em auto;">
+    <p style="color: var(--muted); font-size:1em;">
+      Merci de votre attention
+    </p>
+    <br>
+    <p class="muted" style="font-size:0.8em;">
+      Diaporama réalisé avec <a href="https://revealjs.com" target="_blank">reveal.js</a> ·
+      Diagrammes : <a href="https://plantuml.com" target="_blank">PlantUML</a> ·
+      Visualisations : Python <a href="https://seaborn.pydata.org" target="_blank">seaborn</a>
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     19 — RÉFÉRENCES
+     ═══════════════════════════════════════════════════ -->
+<section>
+  <h2>Références</h2>
+  <ol class="ref-list">
+    <li>
+      Enderle, J. D., &amp; Bronzino, J. D. (2012).
+      <em>Introduction to Biomedical Engineering</em> (3e éd.).
+      Academic Press / Elsevier.
+    </li>
+    <li>
+      Ratner, B. D., Hoffman, A. S., Schoen, F. J., &amp; Lemons, J. E. (2020).
+      <em>Biomaterials Science: An Introduction to Materials in Medicine</em> (4e éd.).
+      Academic Press.
+    </li>
+    <li>
+      Williams, D. F. (2009).
+      On the nature of biomaterials.
+      <em>Biomaterials</em>, 30(30), 5897–5909.
+      <a href="https://doi.org/10.1016/j.biomaterials.2009.07.027" target="_blank">doi:10.1016/j.biomaterials.2009.07.027</a>
+    </li>
+    <li>
+      McKinney, S. M., <em>et al.</em> (2020).
+      International evaluation of an AI system for breast cancer screening.
+      <em>Nature</em>, 577, 89–94.
+      <a href="https://doi.org/10.1038/s41586-019-1799-6" target="_blank">doi:10.1038/s41586-019-1799-6</a>
+    </li>
+    <li>
+      Viceconti, M., <em>et al.</em> (2020).
+      Credibility of in silico trials in medical device development.
+      <em>Nature Biomedical Engineering</em>, 4, 10–24.
+      <a href="https://doi.org/10.1038/s41551-019-0497-z" target="_blank">doi:10.1038/s41551-019-0497-z</a>
+    </li>
+    <li>
+      Taylor, C. A., &amp; Figueroa, C. A. (2009).
+      Patient-specific modeling of cardiovascular mechanics.
+      <em>Annual Review of Biomedical Engineering</em>, 11, 109–134.
+      <a href="https://doi.org/10.1146/annurev.bioeng.10.061807.160521" target="_blank">doi:10.1146/annurev.bioeng.10.061807.160521</a>
+    </li>
+    <li>
+      Jumper, J., <em>et al.</em> (2021).
+      Highly accurate protein structure prediction with AlphaFold.
+      <em>Nature</em>, 596, 583–589.
+      <a href="https://doi.org/10.1038/s41586-021-03819-2" target="_blank">doi:10.1038/s41586-021-03819-2</a>
+    </li>
+    <li>
+      Topol, E. J. (2019).
+      High-performance medicine: the convergence of human and artificial intelligence.
+      <em>Nature Medicine</em>, 25, 44–56.
+      <a href="https://doi.org/10.1038/s41591-018-0300-7" target="_blank">doi:10.1038/s41591-018-0300-7</a>
+    </li>
+    <li>
+      GlobalData. (2024).
+      <em>Medical Devices Market Report 2024</em>.
+      GlobalData Plc, Londres.
+    </li>
+    <li>
+      Organisation mondiale de la Santé (OMS). (2023).
+      <em>Dispositifs médicaux — Priorités mondiales</em>.
+      <a href="https://www.who.int/health-topics/medical-devices" target="_blank">who.int/health-topics/medical-devices</a>
+    </li>
+  </ol>
+</section>
+
+</div><!-- /.slides -->
+</div><!-- /.reveal -->
+
+<!-- Reveal.js JS (CDN) -->
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true,
+    slideNumber: 'c/t',
+    progress: true,
+    controls: true,
+    transition: 'fade',
+    transitionSpeed: 'default',
+    backgroundTransition: 'none',
+    center: false,
+    width: 1100,
+    height: 700,
+    margin: 0.06,
+    plugins: []
+  });
+</script>
+</body>
+</html>

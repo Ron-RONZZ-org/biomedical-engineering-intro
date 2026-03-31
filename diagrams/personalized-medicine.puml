@@ -1,0 +1,25 @@
+@startuml
+skinparam backgroundColor #F8F9FA
+skinparam shadowing false
+skinparam SequenceArrowColor #1565C0
+skinparam SequenceLifeLineBorderColor #1565C0
+skinparam SequenceParticipantBackgroundColor #E3F2FD
+skinparam SequenceParticipantBorderColor #1565C0
+skinparam SequenceFontColor #1A2B3C
+
+title Médecine personnalisée — Flux de simulation
+
+actor       Patient          as P
+participant "Imagerie\nmédicale"     as IM
+participant "Jumeau\nnumérique"      as JN
+participant "Moteur de\nsimulation"  as MS
+participant "Équipe\nmédicale"       as EM
+
+P  -> IM : IRM / Scanner CT
+IM -> JN : Reconstruction 3D\ndu tissu/organe
+JN -> MS : Modèle géométrique\n+ propriétés mécaniques
+MS -> MS : Simulation FEM/CFD\n(hémodynamique, contraintes)
+MS -> EM : Rapport de simulation\n(prédiction de risques)
+EM -> EM : Analyse & planification\nchirurgicale virtuelle
+EM -> P  : Plan thérapeutique\npersonnalisé
+@enduml

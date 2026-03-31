@@ -1,0 +1,35 @@
+@startuml
+skinparam backgroundColor #F8F9FA
+skinparam shadowing false
+skinparam ArrowColor #1565C0
+skinparam ActivityBorderColor #1565C0
+skinparam ActivityBackgroundColor #E3F2FD
+skinparam ActivityFontColor #1A2B3C
+
+start
+:Identification du besoin médical;
+:Recherche & analyse\nde l'état de l'art;
+:Conception préliminaire\n(prototypage virtuel);
+:Tests in silico\n(simulation numérique);
+if (Validation numérique ?) then (oui)
+  :Prototype physique;
+  :Tests in vitro;
+  if (Tests concluants ?) then (oui)
+    :Tests précliniques (in vivo);
+    if (Résultats acceptables ?) then (oui)
+      :Essais cliniques;
+      :Soumission réglementaire\n(FDA / CE Mark);
+      :Mise sur le marché;
+      stop
+    else (non)
+      :Retour à la conception;
+    endif
+  else (non)
+    :Retour à la conception;
+  endif
+else (non)
+  :Retour à la conception;
+endif
+:Itération de conception;
+-> Nouveau cycle;
+@enduml
