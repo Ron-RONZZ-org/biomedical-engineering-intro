@@ -102,7 +102,17 @@
     .ref-list li::before { content: ""; }
 
     img.chart { max-height: 380px; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,.1); }
-    img.diagram { max-height: 440px; background: white; border-radius: 6px; padding: 4px; }
+    img.diagram { max-height: 400px; width: auto; max-width: 100%; background: white; border-radius: 6px; padding: 4px; }
+
+    /* ── Sections : remplissage de la hauteur disponible ── */
+    .reveal .slides section {
+      height: 100%;
+      box-sizing: border-box;
+      padding: 0.3em 1.2em 0.5em;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
 
     /* ── Numérotation de progression ── */
     .progress-bar { position: absolute; bottom: 0; left: 0; height: 3px; background: var(--blue); }
@@ -117,7 +127,7 @@
      1 — TITRE
      ═══════════════════════════════════════════════════ -->
 <section>
-  <div class="title-slide" style="padding-top: 2em;">
+  <div class="title-slide">
     <h1>L'Ingénierie Biomédicale</h1>
     <hr>
     <p class="subtitle">
@@ -358,7 +368,7 @@
 <section>
   <h2>Ingénierie biomédicale — carrefour de disciplines</h2>
   <img class="diagram"
-       src="https://www.plantuml.com/plantuml/svg/UDfDaCaDmo0GHU-kWhEhSE9SV8YKGneOOGmZiOL5Iaf8ATH1Oy4B9ZV-P-RDdnby01SKwbc1xNeoQPwJHkQGaIiQbTEC52Jh-dxLqd1StvkW0bLJLdmylkAk7wiugyczO1X5lN-E0brq5NH3uDhuSFO-HKuEB8lL-W-rLHGS1NqsvAzaD3ZJd4alnYbepB569HThPTaeeD7-cE-jyHXmyUHODxxhKeLHmc1r9WMyfJ1pJXBznke6LavudF473bPsV000"
+       src="../diagrams/interdisciplinary.svg"
        alt="Carte mentale : disciplines de l'ingénierie biomédicale"
        style="max-height:400px; background:white; border-radius:6px; padding:4px;">
   <p class="cite muted" style="font-size:0.65em; margin-top:4px;">
@@ -392,7 +402,7 @@
 <section>
   <h2>Médecine personnalisée &amp; jumeaux numériques</h2>
   <img class="diagram"
-       src="https://www.plantuml.com/plantuml/svg/UDgDayzk4p4Gnkz-Yb6G41MWGACYw04rIRDI8hQA4ewvcDt9ngftx8vjIczSU-SXo7Fic_0aJ3P_sW1IiRGNp-_pzyruVH6YvfXggyAr8QzPr_155zSLkqJbq5d7y2nxdtt8-e-8iDAbkpLKmLBRW8ygSxn9I0NscTtjJlxsxDtPyCq_e4zcAH_Xm769_1GzbQ2cC5vJ7FoPSDJBJhFB9qJ_vP8vYdkcVphe3PMA9bg4l5cNM4XQyCZ14MbhGhD6-FNz1sGsVOCI8PWwMHsD8wLq4UMKxPhA7bA4mz81fie_X8FEkDOLii45rU9a2csniqV7-J4xIJNgj21AmhAHv9t3iPEhOpPt4HDBk0KzfEkqQ3u_HflxcsJytmbQU9GhDGLu_L7Im3cCPpbqOLve8cGOVbQoAxN9bTHcM3WAaLEnyOBUvOBA1D64aBgEAqseX1CwdmkTkxBvAGEkchKJuzZsiw2NuDbvDhBJh0D8HRmsfQ14jXVF3or1DigxmqoyNgoQTUtAEzBrXdy5aYQoDXGndEp4eqqFC-szutXySQBttFRVdYerDc5ZUw96-K7Qb-k_2mZFmLk9jPHfRSN5od3YgfqUV3Nojj1Qt4bbVkSm5G54oSZQOuhRRe_-ANM1CZ1vaxy1Mzf73000"
+       src="../diagrams/personalized-medicine.svg"
        alt="Flux de simulation pour la médecine personnalisée"
        style="max-height:390px; background:white; border-radius:6px; padding:4px;">
   <p class="cite muted" style="font-size:0.65em; margin-top:4px;">
@@ -406,7 +416,7 @@
 <section>
   <h2>Du concept au patient — pipeline réglementaire</h2>
   <img class="diagram"
-       src="https://www.plantuml.com/plantuml/svg/UDg5Kyrkqq0GllifHaA2v820LaMGID0qZQKUYb10dBXCrfDabFMksTbDbRVXwkVmYtLi9r4Q2XmiZMQ-d_bPNql445DfCzcmgp1W2GiqcrNmoHLJRts05_c7_6C-EK786Wl_m6u5IxH29vL92FvXJtjtzVvg-lQqQ29lEUvkV2We_1TrtiRiCh_8Rvz1vjx5WzhaukPoccNTMDdehY0NUSa68ti7HO85YMS7PLCNchNZR3GdiwQW7xm4T6XtGZzTGM1VDNN425seQWgTUcUewgIgqDIMItR8GV63AlZeuwx25S6MTQLaXyhuJX85r53Oil4A52wJxTjnITi8_2kHGda9WnzekJYlmUSXn3Kv6FZ4mmnWz7NlHL2jTz9YnctwwAKx2RvDjPfzrcZdDg7Jy5pko6n7CfPTAoWmw8IsVZZkCAtKlAabMTs909fs4RYmz9oWIiv4aDNte3S-5BxvLB98EwFwhIoLUgBz4lFR2Ro1wGpkCMo6Hyez2u6a09QWH3rLKnzg4dtLXQJl40REksC7SufUESrliDZDtr-kPv8hU9dzGViNgQSy8VmTteD7Tr6Fk7zxz0Jm-XDyyMbBcC3iZDKBNYkd_H4V0K0OEdq0"
+       src="../diagrams/medical-device-pipeline.svg"
        alt="Pipeline de développement d'un dispositif médical"
        style="max-height:430px; background:white; border-radius:6px; padding:4px;">
   <p class="cite muted" style="font-size:0.65em; margin-top:4px;">
@@ -473,7 +483,7 @@
      18 — QUESTIONS
      ═══════════════════════════════════════════════════ -->
 <section>
-  <div style="text-align:center; padding-top:2.5em;">
+  <div style="text-align:center;">
     <h1 style="font-size:2.4em;">Questions ?</h1>
     <hr style="width:40%; margin:1em auto;">
     <p style="color: var(--muted); font-size:1em;">
@@ -567,7 +577,7 @@
     transition: 'fade',
     transitionSpeed: 'default',
     backgroundTransition: 'none',
-    center: false,
+    center: true,
     width: 1100,
     height: 700,
     margin: 0.06,
